@@ -5,6 +5,8 @@ import {
     Map
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import image1 from './../assets/back1.jpeg';
+import image2 from './../assets/back2.jpeg'
 
 export default function Home() {
     const darkOrangeBg = "bg-[#E65C00]";
@@ -19,7 +21,7 @@ export default function Home() {
                 <div
                     className="absolute inset-0 z-0"
                     style={{
-                        backgroundImage: "url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')",
+                        backgroundImage: `url(${image1})`,
                         backgroundPosition: "center",
                         backgroundSize: "cover",
                         backgroundAttachment: "fixed" // Effet parallaxe léger
@@ -158,7 +160,7 @@ export default function Home() {
                             <div className="relative">
                                 <div className={`absolute -inset-4 ${darkOrangeBg} rounded-3xl transform rotate-3 opacity-20`}></div>
                                 <img
-                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                    src={image2}
                                     alt="Jeunes étudiants"
                                     className="relative rounded-3xl shadow-2xl object-cover h-[700px] w-full"
                                 />

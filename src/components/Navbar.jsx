@@ -48,6 +48,7 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center space-x-8">
                         <Link to="/" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Accueil</Link>
                         <Link to="/programmes" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Nos Programmes</Link>
+                        <Link to="/objectifs" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Nos Objectifs</Link>
                         <Link to="/partenariat" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Partenariat</Link>
                         <a href="#contact" className="bg-[#E65C00] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#cc5200] transition-colors shadow-lg shadow-orange-500/30">
                             Nous Contacter

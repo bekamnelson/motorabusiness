@@ -7,7 +7,7 @@ import Partenariat from './pages/Partenariat';
 // Nouvelles pages de programmes
 import VisionBoost from './pages/VisionBoost';
 import InitiationEntrepreneuriat from './pages/InitiationEntrepreneuriat';
-
+import Objectifs from './pages/Objectifs';
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/programmes" element={<Programmes />} />
             <Route path="/partenariat" element={<Partenariat />} />
+            <Route path="/objectifs" element={<Objectifs />} />
             {/* Nouvelles routes */}
             <Route path="/programmes/vision-boost" element={<VisionBoost />} />
             <Route path="/programmes/initiation-entrepreneuriat" element={<InitiationEntrepreneuriat />} />
