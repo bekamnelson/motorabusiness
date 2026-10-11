@@ -1,6 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import liens from '../data/navigation';
+
+// Lien de la page en cours en orange
+const classeLien = (base) => ({ isActive }) => `${base} ${isActive ? 'text-motora-orange' : 'text-gray-800'}`;
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,25 +43,24 @@ export default function Navbar() {
                         />
                         {/* Texte de secours si le logo ne charge pas */}
                         <div className="hidden text-xl font-black tracking-tighter leading-none">
-                            <span className="text-[#0072BC]">MOTORA</span><br />
-                            <span className="text-[#E65C00]">BUSINESS</span>
+                            <span className="text-motora-blue">MOTORA</span><br />
+                            <span className="text-motora-orange">BUSINESS</span>
                         </div>
                     </Link>
 
                     {/* Menu Desktop */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        <Link to="/" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Accueil</Link>
-                        <Link to="/programmes" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Nos Programmes</Link>
-                        <Link to="/objectifs" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Nos Objectifs</Link>
-                        <Link to="/partenariat" className="text-gray-700 hover:text-[#E65C00] font-semibold transition-colors">Partenariat</Link>
-                        <a href="#contact" className="bg-[#E65C00] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#cc5200] transition-colors shadow-lg shadow-orange-500/30">
+                    <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                        {liens.map((lien) => (
+                            <NavLink key={lien.to} to={lien.to} end={lien.to === "/"} className={classeLien('hover:text-motora-orange font-semibold transition-colors')}>{lien.label}</NavLink>
+                        ))}
+                        <Link to="/contact" className="bg-motora-orange text-white px-6 py-2.5 rounded-full font-bold hover:bg-motora-orange-dark transition-colors shadow-lg shadow-orange-500/30">
                             Nous Contacter
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Bouton Menu Mobile */}
-                    <div className="md:hidden flex items-center">
-                        <button onClick={() => setIsOpen(!isOpen)} className="text-gray-900 focus:outline-none">
+                    <div className="lg:hidden flex items-center">
+                        <button onClick={() => setIsOpen(!isOpen)} className="text-motora-navy focus:outline-none" aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'} aria-expanded={isOpen}>
                             {isOpen ? <X size={32} /> : <Menu size={32} />}
                         </button>
                     </div>
@@ -65,12 +68,12 @@ export default function Navbar() {
             </div>
 
             {/* Menu Mobile */}
-            <div className={`md:hidden absolute w-full bg-white border-t transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+            <div className={`lg:hidden absolute w-full bg-white border-t transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[40rem] opacity-100' : 'max-h-0 opacity-0 overflow-hidden invisible'}`}>
                 <div className="px-4 pt-2 pb-6 space-y-2 shadow-xl">
-                    <Link to="/" className="block px-3 py-3 text-gray-800 font-semibold hover:bg-orange-50 hover:text-[#E65C00] rounded-lg">Accueil</Link>
-                    <Link to="/programmes" className="block px-3 py-3 text-gray-800 font-semibold hover:bg-orange-50 hover:text-[#E65C00] rounded-lg">Nos Programmes</Link>
-                    <Link to="/partenariat" className="block px-3 py-3 text-gray-800 font-semibold hover:bg-orange-50 hover:text-[#E65C00] rounded-lg">Partenariat</Link>
-                    <a href="#contact" className="block px-3 py-3 mt-4 text-center bg-[#E65C00] text-white font-bold rounded-lg">Nous Contacter</a>
+                    {liens.map((lien) => (
+                        <NavLink key={lien.to} to={lien.to} end={lien.to === "/"} className={classeLien('block px-3 py-3 font-semibold hover:bg-orange-50 hover:text-motora-orange rounded-lg')}>{lien.label}</NavLink>
+                    ))}
+                    <Link to="/contact" className="block px-3 py-3 mt-4 text-center bg-motora-orange text-white font-bold rounded-lg">Nous Contacter</Link>
                 </div>
             </div>
         </nav>

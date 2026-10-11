@@ -1,65 +1,89 @@
-import { ArrowRight, Compass, Rocket } from 'lucide-react';
+import { ArrowRight, Compass, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import programmes from '../data/programmes';
+import PageHero from '../components/PageHero';
+import imageHero from '../assets/programmes/mbs-1.jpeg';
 
 export default function Programmes() {
     return (
-        <div className="py-24 bg-gray-50 min-h-screen animate-fade-in">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-slate-50 min-h-screen animate-fade-in">
+            <PageHero
+                eyebrow="L'incubateur des jeunes"
+                titre="Nos Programmes"
+                sousTitre="De l'école à l'atelier de l'artisan, six programmes pour transformer les idées en projets concrets."
+                image={imageHero}
+            />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
 
-                {/* En-tête */}
-                <div className="text-center mb-20 mt-10">
-                    <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">Nos Programmes</h1>
-                    <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
-                        Choisissez le parcours adapté à vos ambitions. Une approche pragmatique pensée pour transformer vos intentions en résultats tangibles.
-                    </p>
+                {/* Grille des programmes */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {programmes.map((programme) => {
+                        const Icon = programme.icon;
+                        const image = programme.images[0];
+                        return (
+                            <Link
+                                key={programme.slug}
+                                to={`/programmes/${programme.slug}`}
+                                className="bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 group"
+                            >
+                                <div className="relative h-52 overflow-hidden bg-orange-50">
+                                    {image ? (
+                                        <img
+                                            src={image}
+                                            alt={programme.titre}
+                                            loading="lazy"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center">
+                                            <Icon size={80} className="text-motora-orange opacity-30" />
+                                        </div>
+                                    )}
+                                    <div className="absolute top-4 left-4 w-12 h-12 bg-motora-orange rounded-xl flex items-center justify-center text-white shadow-lg">
+                                        <Icon size={24} />
+                                    </div>
+                                </div>
+
+                                <div className="p-6 md:p-8 flex flex-col flex-grow">
+                                    <h3 className="text-xl md:text-2xl font-bold text-motora-navy mb-2 leading-snug">
+                                        {programme.titre}
+                                        {programme.sigle && <span className="text-motora-orange"> ({programme.sigle})</span>}
+                                    </h3>
+                                    <p className="flex items-center gap-2 text-sm font-semibold text-motora-orange mb-4">
+                                        <Users size={16} /> {programme.cible}
+                                    </p>
+                                    <p className="text-gray-600 text-base md:text-lg mb-6 flex-grow">{programme.resume}</p>
+                                    <span className="inline-flex items-center gap-2 font-bold text-motora-orange group-hover:gap-4 transition-all">
+                                        Découvrir le programme <ArrowRight size={20} />
+                                    </span>
+                                </div>
+                            </Link>
+                        );
+                    })}
                 </div>
 
-                {/* Grille des boîtes (Cards) */}
-                <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-
-                    {/* Boîte 1 : Vision Boost */}
-                    <div className="bg-white rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 group">
-                        <div className="h-4 bg-[#0072BC]"></div>
-                        <div className="p-12 flex flex-col flex-grow">
-                            <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                                <Compass size={40} className="text-[#0072BC]" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">Orientation & Vision Professionnelle</h2>
-                            <h3 className="text-xl text-[#0072BC] font-semibold mb-6">Vision_Boost_program</h3>
-                            <p className="text-gray-600 text-lg mb-10 flex-grow">
-                                Un parcours introspectif et progressif pour accompagner les jeunes à mieux se connaître, à identifier leur vocation et à construire un plan d’action réaliste.
-                            </p>
-                            <Link
-                                to="/programmes/vision-boost"
-                                className="inline-flex items-center justify-center gap-3 bg-[#0072BC] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors w-full"
-                            >
-                                Découvrir le programme <ArrowRight size={24} />
-                            </Link>
+                {/* Parcours d'orientation Vision Boost */}
+                <div className="mt-20 bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col md:flex-row">
+                    <div className="md:w-3 h-3 md:h-auto bg-motora-blue"></div>
+                    <div className="p-8 md:p-12 flex flex-col md:flex-row md:items-center gap-8 flex-grow">
+                        <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Compass size={32} className="text-motora-blue" />
                         </div>
-                    </div>
-
-                    {/* Boîte 2 : Initiation Entrepreneuriat */}
-                    <div className="bg-white rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 group">
-                        <div className="h-4 bg-[#E65C00]"></div>
-                        <div className="p-12 flex flex-col flex-grow">
-                            <div className="w-20 h-20 bg-orange-50 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                                <Rocket size={40} className="text-[#E65C00]" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">Initiation à l'Entrepreneuriat & Business</h2>
-                            <h3 className="text-xl text-[#E65C00] font-semibold mb-6">Niveau Débutant</h3>
-                            <p className="text-gray-600 text-lg mb-10 flex-grow">
-                                Une introduction concrète et contextualisée à l’entrepreneuriat, adaptée aux réalités locales et aux aspirations des jeunes pour créer des projets viables.
+                        <div className="flex-grow">
+                            <h3 className="text-2xl md:text-3xl font-bold text-motora-navy mb-2">Parcours d'orientation : Vision Boost</h3>
+                            <p className="text-gray-600 text-base md:text-lg">
+                                Un parcours introspectif pour aider les jeunes à mieux se connaître, identifier leur vocation et construire un plan d'action réaliste.
                             </p>
-                            <Link
-                                to="/programmes/initiation-entrepreneuriat"
-                                className="inline-flex items-center justify-center gap-3 bg-[#E65C00] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#cc5200] transition-colors w-full"
-                            >
-                                Découvrir le programme <ArrowRight size={24} />
-                            </Link>
                         </div>
+                        <Link
+                            to="/programmes/vision-boost"
+                            className="inline-flex items-center justify-center gap-3 bg-motora-blue text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-colors flex-shrink-0"
+                        >
+                            Voir le parcours <ArrowRight size={20} />
+                        </Link>
                     </div>
-
                 </div>
+
             </div>
         </div>
     );

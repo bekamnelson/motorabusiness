@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@theme {
+  /* Police */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Couleurs de la marque Motora (tirées du logo) */
+  --color-motora-orange: #E65C00;
+  --color-motora-orange-dark: #C24E00;
+  --color-motora-orange-light: #FFF4EC;
+  --color-motora-blue: #0072BC;
+  --color-motora-navy: #0B2545;
+  --color-motora-light: #F3F8FC;
+
+  /* Apparition douce des pages */
+  --animate-fade-in: fade-in 0.5s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Les ancres (#contact) ne passent pas sous la barre de navigation fixe */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Les visiteurs qui préfèrent moins d'animations n'en ont pas */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
